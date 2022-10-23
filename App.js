@@ -8,13 +8,13 @@ export default function App() {
   const [user, setUser] = useState(null)
 
   if (!user) {
-    return <Login />
+    return <Login changeStatus={(user) => setUser(user)} />
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="inverted" />
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Dentro da tela de tarefas</Text>
     </SafeAreaView>
   );
 }
