@@ -2,14 +2,38 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export default function Login() {
+import firebase from '../../services/firebaseConnection'
+
+export default function Login({ changeStatus }) {
   const [type, setType] = useState('login')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   function handleLogin() {
-    alert('Logou')
+    if (type === 'login') {
+      // Fazer o login
+      const user = firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((user) => {
+          changeStatus(user.user.uid)
+        })
+        .catch((error) => {
+          console.log(error)
+          alert('Ops, parece que deu algum erro!')
+          return
+        })
+    } else {
+      //cadastrar usuario
+      const user = firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+          changeStatus(user.user.uid)
+        })
+        .catch((error) => {
+          console.log(error)
+          alert('Ops, erro ao cadastrar!')
+          return
+        })
+    }
   }
 
 
@@ -52,7 +76,6 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
     backgroundColor: '#121214',
     alignItems: 'center',
     justifyContent: 'center',
@@ -60,7 +83,7 @@ const styles = StyleSheet.create({
   input: {
     color: '#fff',
     backgroundColor: '#4f4f4f',
-    width: '100%',
+    width: '80%',
     marginVertical: 10,
     padding: 15,
     height: 50,
@@ -70,7 +93,7 @@ const styles = StyleSheet.create({
   btn: {
     height: 50,
     padding: 15,
-    width: '100%',
+    width: '80%',
     alignItems: 'center',
     backgroundColor: '#81d8f7',
     borderRadius: 5,
