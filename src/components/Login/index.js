@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -53,7 +54,7 @@ export default function Login({ changeStatus }) {
         onChangeText={(text) => setPassword(text)}
       />
 
-      <TouchableOpacity style={styles.btn} onPress={handleLogin}>
+      <TouchableOpacity style={[styles.btn, { backgroundColor: type !== 'login' ? '#81d8f7' : '#ff726b' }]} onPress={handleLogin}>
         <Text style={styles.textBtn}>
           {type === 'login' ? 'Acessar' : 'Cadastrar'}
         </Text>
@@ -67,6 +68,7 @@ export default function Login({ changeStatus }) {
           {type === 'login' ? 'Criar uma conta' : 'Já tem uma conta?'}
         </Text>
       </TouchableOpacity>
+      <StatusBar style='inverted' />
     </SafeAreaView>
   );
 }
@@ -93,7 +95,6 @@ const styles = StyleSheet.create({
     padding: 15,
     width: '80%',
     alignItems: 'center',
-    backgroundColor: '#81d8f7',
     borderRadius: 5,
     marginVertical: 10,
   },
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   textBtn: {
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: '500'
   },
   textLink: {
     color: '#fff'
