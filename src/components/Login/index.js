@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import firebase from '../../services/firebaseConnection'
 
@@ -39,6 +39,9 @@ export default function Login({ changeStatus }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+        <Image source={require('../../../assets/check.png')} style={{ width: 100, height: 100, marginBottom: 30 }} />
+      </View>
       <TextInput
         placeholder='Seu e-mail'
         placeholderTextColor='#fff'
@@ -54,7 +57,7 @@ export default function Login({ changeStatus }) {
         onChangeText={(text) => setPassword(text)}
       />
 
-      <TouchableOpacity style={[styles.btn, { backgroundColor: type !== 'login' ? '#81d8f7' : '#ff726b' }]} onPress={handleLogin}>
+      <TouchableOpacity style={[styles.btn, { backgroundColor: type !== 'login' ? '#8cffcf' : '#81d8f7' }]} onPress={handleLogin}>
         <Text style={styles.textBtn}>
           {type === 'login' ? 'Acessar' : 'Cadastrar'}
         </Text>
